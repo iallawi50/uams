@@ -1,0 +1,15 @@
+{
+  "require": {
+    "symfony/dotenv": "^6.3",
+    "nesbot/carbon": "^3.10"  
+  },
+  "autoload": {
+    "classmap": [
+      "App",
+      "App/*"
+    ],
+    "files": [
+      "App/helpers.php"
+    ]
+  }
+}
