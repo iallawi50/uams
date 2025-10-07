@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Request;
+use App\Models\Feedback;
 use App\Models\Registration;
+use App\Models\User;
 use App\QueryBuilder;
 
 class RegistrationController extends Controller
@@ -14,15 +16,15 @@ class RegistrationController extends Controller
         $data = [
             "event_id" => Request::get("id"),
             "user_id" => user()->id
-
         ];
-    // QueryBuilder::select("registrations", "'event_id' = $event_id AND 'user_id' = $user_id", true);
 
+        if (Registration::isRegistered($data["event_id"], $data["user_id"])) {
+            return redirect("event?id=" . $data["event_id"]);
+        } else {
 
-    Registration::create($data);
-
-    return redirect("event/register");
-
+            Registration::create($data);
+            return redirect("event/register");
+        }
     }
 
 
@@ -31,5 +33,18 @@ class RegistrationController extends Controller
         return view("event/completed");
     }
 
-    
+    public function show()
+    {
+        $events = user()->events();
+        // echo "<pre>";
+        // foreach ($events as $event) {
+        //     print_r($event->event());
+        // }
+        // echo "</pre>";
+        // exit;
+
+        return view("event/registered", compact("events"));
+    }
+
+
 }

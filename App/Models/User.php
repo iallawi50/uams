@@ -13,4 +13,9 @@ class User extends Model
     public $password;
     public $is_admin;
 
+    public function events()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
 }

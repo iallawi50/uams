@@ -20,3 +20,7 @@ body {
   color: #006747;
 }
 
+.star {
+  cursor: pointer;
+  transition: color 0.2s;
+}

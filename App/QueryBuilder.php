@@ -16,22 +16,30 @@ class QueryBuilder
     public static function select($table, $where = null, $oneColumn = false, $class = null)
     {
         $query = "SELECT * FROM $table";
-        is_array($where)
-            ?    $query .= " WHERE $where[0] $where[1] '$where[2]'"
-            : null;
+
+        if (is_array($where)) {
+            if (isset($where[0]) && is_array($where[0])) {
+                $conditions = [];
+                foreach ($where as $condition) {
+                    $conditions[] = "$condition[0] $condition[1] '$condition[2]'";
+                }
+                $query .= " WHERE " . implode(" AND ", $conditions);
+            } else {
+                $query .= " WHERE $where[0] $where[1] '$where[2]'";
+            }
+        }
 
         if ($oneColumn) {
             return self::execute($query)->fetch(\PDO::FETCH_OBJ);
         } else {
-            if($class)
-            {
+            if ($class) {
                 return self::execute($query)->fetchAll(\PDO::FETCH_CLASS, $class);
-            }else 
-            {
+            } else {
                 return self::execute($query)->fetchAll(\PDO::FETCH_OBJ);
             }
         }
     }
+
 
     public static function insert($table, $data)
     {
@@ -52,9 +60,9 @@ class QueryBuilder
 
     public static function update($table, $id, $where)
     {
-        $sets = implode("=?, ", array_keys($where)) . "=?" ;
+        $sets = implode("=?, ", array_keys($where)) . "=?";
         $query = "UPDATE $table set $sets where id = $id";
-         self::execute($query, array_values($where));    
+        self::execute($query, array_values($where));
     }
 
     private static function execute($query, $values = [])

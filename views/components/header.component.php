@@ -36,8 +36,8 @@ if (isset($_SESSION["user"]) && !User::find($_SESSION["user"]->id)) {
                 <h1 class="text-xl font-bold">نظام إدارة الفعاليات الجامعية</h1>
             </div>
             <div class="hidden md:flex space-x-6 space-x-reverse">
-                <a href="#" class="hover:text-gray-200">الرئيسية</a>
-                <a href="#" class="hover:text-gray-200">الفعاليات</a>
+                <a href="<?=home()?>" class="hover:text-gray-200">الرئيسية</a>
+                <a href="<?=home()?>/event/registered" class="hover:text-gray-200">الفعاليات المسجلة</a>
                 <a href="#" class="hover:text-gray-200">عن النظام</a>
                 <a href="#" class="hover:text-gray-200">اتصل بنا</a>
             </div>
@@ -47,7 +47,7 @@ if (isset($_SESSION["user"]) && !User::find($_SESSION["user"]->id)) {
                 ?>
                 
                     <?php if(user()->is_admin): ?>
-                    <a href="dashboard" class="bg-white kfu-text px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">لوحة التحكم</a>
+                    <a href="dashboard" class="bg-white kfu-text px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">الفعاليات المسجلة</a>
 
                     <?php endif?>
                     <form action="logout" method="post">

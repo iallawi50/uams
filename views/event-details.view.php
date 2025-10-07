@@ -1,4 +1,9 @@
-<?php component("header") ?>
+<?php
+
+use App\Core\Request;
+use App\Models\Registration;
+
+component("header") ?>
 
 
 
@@ -69,7 +74,9 @@
                     </div>
 
 
+
                 </div>
+
 
                 <!-- Sidebar -->
                 <div class="lg:col-span-1">
@@ -101,13 +108,26 @@
                         </div> -->
 
                         <div class="space-y-4">
-                            <form action="<?= home() ?>/event/register?id=<?=$event->id?>" method="post">
-                                <button type="submit"
-                                    class="block kfu-primary text-white text-center py-3 rounded-lg hover:bg-green-700 transition font-medium">التسجيل في الفعالية
+                            <?php if (Registration::isRegistered($event->id, user()->id)): ?>
+                                <button type="submit" disabled
+                                    class="block w-full kfu-primary text-white text-center py-3 rounded-lg opacity-75  font-medium">مسجل بالفعل
 
                                 </button>
-                            </form>
-                            <a
+
+                            <?php elseif (!(\Carbon\Carbon::now()->lt(\Carbon\Carbon::parse($event->date)))): ?>
+
+                            <?php else: ?>
+
+                                <form action="<?= home() ?>/event/register?id=<?= $event->id ?>" method="post">
+                                    <button type="submit"
+                                        class="block w-full kfu-primary text-white text-center py-3 rounded-lg hover:bg-green-700 transition font-medium">التسجيل في الفعالية
+
+                                    </button>
+                                </form>
+
+                            <?php endif ?>
+
+                            <!-- <a
                                 href="#"
                                 class="block border border-gray-300 text-gray-700 text-center py-3 rounded-lg hover:bg-gray-100 transition font-medium">إضافة إلى المفضلة</a>
                             <a
@@ -115,10 +135,50 @@
                                 class="flex items-center justify-center text-gray-600 hover:text-gray-800">
                                 <i data-feather="share-2" class="ml-2"></i>
                                 <span>مشاركة الفعالية</span>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+            <!-- Rates -->
+            <div class="px-4 mb-5">
+                <!-- Ratings & Comments -->
+                <div class="mt-12">
+                    <?php if ($event->status == 2): ?>
+                        <h2 class="text-2xl font-bold kfu-text mb-4">آراء المشاركين</h2>
+
+                        <?php if ($event->feedbacks() && count($event->feedbacks()) > 0): ?>
+                            <div class="space-y-6">
+                                <?php foreach ($event->feedbacks() as $feedback): ?>
+                                    <div class="bg-gray-50 p-4 rounded-lg shadow">
+                                        <!-- النجوم -->
+                                        <div class="flex items-center mb-2">
+                                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                <?php if ($i <= $feedback->rating): ?>
+                                                    <span class="text-yellow-500 text-xl">★</span>
+                                                <?php else: ?>
+                                                    <span class="text-gray-300 text-xl">★</span>
+                                                <?php endif; ?>
+                                            <?php endfor; ?>
+                                        </div>
+                                        <!-- التعليق -->
+                                        <p class="text-gray-700"><?= htmlspecialchars($feedback->feedback_text) ?></p>
+
+                                        <!-- التاريخ (إذا عندك created_at) -->
+                                        <?php if (isset($feedback->created_at)): ?>
+                                            <p class="text-sm text-gray-500 mt-2"><?= $feedback->created_at ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="text-gray-500">لا توجد تقييمات بعد، كن أول من يشارك رأيه</p>
+                        <?php endif; ?>
+                </div>
+            <?php endif ?>
+
             </div>
         </div>
     </div>

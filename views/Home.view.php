@@ -1,6 +1,7 @@
 <?php
 
 use App\Middleware\Auth;
+use Carbon\Carbon;
 
 component("header") ?>
 
@@ -14,7 +15,7 @@ component("header") ?>
             منصة متكاملة لإدارة الفعاليات والأنشطة الطلابية في جامعة الملك فيصل
         </p>
         <div class="flex justify-center space-x-4 space-x-reverse" data-aos="fade-up" data-aos-delay="200">
-            <?= Auth::check() ? '': "<a href=" .home()."/register class='bg-white kfu-text px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition'>سجل الآن</a>" ?>
+            <?= Auth::check() ? '' : "<a href=" . home() . "/register class='bg-white kfu-text px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition'>سجل الآن</a>" ?>
             <a href="#events" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white  hover:text-green-900 transition">استكشف الفعاليات</a>
         </div>
     </div>
@@ -23,10 +24,14 @@ component("header") ?>
 <!-- Events Section -->
 <section id="events" class="py-16 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center kfu-text mb-12">الفعاليات القادمة</h2>
+        <h2 class="text-3xl font-bold text-center kfu-text mb-12">الفعاليات</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <?php foreach ($events as $event): ?>
+            <?php foreach ($events as $event):
+            ?>
+                <?php
+                if (Carbon::parse($event->date)->isBefore(\Carbon\Carbon::now()->subWeeks(2))) continue;
+                ?>
 
                 <!-- Event Card 1 -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200" data-aos="fade-up">
@@ -57,7 +62,7 @@ component("header") ?>
                             <i data-feather="map-pin" class="ml-2"></i>
                             <span><?= $event->location ?></span>
                         </div>
-                        <a href="<?=home()?>/event?id=<?=$event->id?>" class="block kfu-primary text-white text-center py-2 rounded-lg hover:bg-green-700 transition">التفاصيل</a>
+                        <a href="<?= home() ?>/event?id=<?= $event->id ?>" class="block kfu-primary text-white text-center py-2 rounded-lg hover:bg-green-700 transition">التفاصيل</a>
                     </div>
                 </div>
 
