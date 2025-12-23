@@ -3,7 +3,7 @@
     <div class="container mx-auto">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold kfu-text">إضافة فعالية جديدة</h1>
-            <a href="<?= home() ?>/events" class="flex items-center space-x-1 space-x-reverse text-gray-600 hover:text-gray-800">
+            <a href="<?= home() ?>/dashboard" class="flex items-center space-x-1 space-x-reverse text-gray-600 hover:text-gray-800">
                 <i data-feather="arrow-right"></i>
                 <span>عودة إلى قائمة الفعاليات</span>
             </a>
