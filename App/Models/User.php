@@ -18,4 +18,9 @@ class User extends Model
         return $this->hasMany(Registration::class);
     }
 
+    public function admin_events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 }

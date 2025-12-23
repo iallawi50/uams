@@ -37,6 +37,9 @@ Route::make()
 ->get("dashboard", [AdminController::class, "index"])
 ->get("dashboard/events/create", [EventController::class, "create"])
 ->post("dashboard/events/create", [EventController::class, "store"])
+->get("dashboard/events/edit", [EventController::class, "edit"])
+->post("dashboard/events/edit", [EventController::class, "update"])
+->post("dashboard/events/delete", [EventController::class, "delete"])
 
 
 ->resolve(Request::uri(), Request::method());

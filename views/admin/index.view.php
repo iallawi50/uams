@@ -100,12 +100,13 @@ component("admin/header") ?>
                                         } ?>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <a href="#" class="text-green-600 hover:text-green-900 mr-2">عرض</a>
-                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-2">تعديل</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">حذف</a>
+                                        <a href="<?= home() ?>/event?id=<?= $event->id ?>" class="text-green-600 hover:text-green-900 mr-2">عرض</a>
+                                        <a href="<?= home() ?>/dashboard/events/edit?id=<?= $event->id ?>" class="text-blue-600 hover:text-blue-900 mr-2">تعديل</a>
+                                        <button form="delete" onclick="return confirm('هل انت متأكد من حذف هذه الفعالية ؟')" type="submit" href="#" class="text-red-600 hover:text-red-900">حذف</button>
                                     </td>
                                 </tr>
 
+                                <form method="POST" id="delete" action="<?= home() ?>/dashboard/events/delete?id=<?= $event->id ?>"></form>
                             <?php endforeach ?>
                             <!-- <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">يوم المهنة الجامعي</td>
@@ -152,20 +153,6 @@ component("admin/header") ?>
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-lg shadow p-6" data-aos="fade-up">
-                <h2 class="text-xl font-bold kfu-text mb-4">إضافة فعالية جديدة</h2>
-                <p class="text-gray-600 mb-4">قم بإضافة فعالية جديدة إلى النظام وإدارتها بسهولة</p>
-                <a href="admin-add-event.html" class="inline-block kfu-primary text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">إضافة فعالية</a>
-            </div>
-            <div class="bg-white rounded-lg shadow p-6" data-aos="fade-up" data-aos-delay="100">
-                <h2 class="text-xl font-bold kfu-text mb-4">تقرير المشاركات</h2>
-                <p class="text-gray-600 mb-4">عرض تقارير مشاركات الطلاب في الفعاليات المختلفة</p>
-                <a href="admin-reports.html" class="inline-block kfu-primary text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">عرض التقارير</a>
             </div>
         </div>
     </div>

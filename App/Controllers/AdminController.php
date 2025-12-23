@@ -23,8 +23,9 @@ class AdminController extends Controller
             return redirect_home();
         }
         $events = Event::all(true);
+        $events = user()->admin_events();
 
-        // echo "<pre>"
+        // echo "<pre>";
         // print_r($events);
         // return;
 
