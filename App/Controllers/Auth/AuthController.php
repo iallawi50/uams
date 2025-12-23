@@ -20,6 +20,36 @@ class AuthController extends Controller
         return view("auth/register");
     }
 
+    public function forget_password() 
+    {
+        return view("auth/forget-password");
+    }
+
+    public function reset() {
+        return view("auth/reset");
+    }
+
+    public function update_password(){
+        $email = Request::get("email");
+        $password = Request::get("password");
+
+        $user = User::find($email, "email", "=");
+    
+        if($user) {
+
+            User::update($user->id, [
+                "password" => $password
+            ]);
+
+        } else {
+            redirect("register");
+        }
+        
+        redirect("login");
+
+
+    }
+
     public function store()
     {
 

@@ -60,18 +60,6 @@ if (isset($_SESSION["user"]) && !User::find($_SESSION["user"]->id)) {
                     <i data-feather="calendar"></i>
                     <span>إدارة الفعاليات</span>
                 </a>
-                <a href="admin-students.html" class="flex items-center space-x-2 space-x-reverse py-2 px-4 text-white  rounded-lg transition">
-                    <i data-feather="users"></i>
-                    <span>إدارة الطلاب</span>
-                </a>
-                <a href="admin-reports.html" class="flex items-center space-x-2 space-x-reverse py-2 px-4 text-white  rounded-lg transition">
-                    <i data-feather="bar-chart-2"></i>
-                    <span>التقارير والإحصائيات</span>
-                </a>
-                <a href="admin-settings.html" class="flex items-center space-x-2 space-x-reverse py-2 px-4 text-white  rounded-lg transition">
-                    <i data-feather="settings"></i>
-                    <span>الإعدادات</span>
-                </a>
             </nav>
         </div>
 

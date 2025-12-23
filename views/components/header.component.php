@@ -47,7 +47,7 @@ if (isset($_SESSION["user"]) && !User::find($_SESSION["user"]->id)) {
                 ?>
                 
                     <?php if(user()->is_admin): ?>
-                    <a href="dashboard" class="bg-white kfu-text px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">الفعاليات المسجلة</a>
+                    <a href="<?=  home() ?>/dashboard" class="bg-white kfu-text px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">لوحة التحكم</a>
 
                     <?php endif?>
                     <form action="logout" method="post">

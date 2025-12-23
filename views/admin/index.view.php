@@ -15,7 +15,7 @@ component("admin/header") ?>
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">إجمالي الفعاليات</p>
-                        <h3 class="text-2xl font-bold kfu-text">24</h3>
+                        <h3 class="text-2xl font-bold kfu-text"><?= $stats["events"] ?></h3>
                     </div>
                     <div class="kfu-primary rounded-full w-12 h-12 flex items-center justify-center">
                         <i data-feather="calendar" class="text-white"></i>
@@ -26,7 +26,7 @@ component("admin/header") ?>
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">الطلاب المسجلين</p>
-                        <h3 class="text-2xl font-bold kfu-text">1,245</h3>
+                        <h3 class="text-2xl font-bold kfu-text"><?= $stats["registration"] ?></h3>
                     </div>
                     <div class="kfu-primary rounded-full w-12 h-12 flex items-center justify-center">
                         <i data-feather="users" class="text-white"></i>
@@ -37,7 +37,7 @@ component("admin/header") ?>
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">الفعاليات القادمة</p>
-                        <h3 class="text-2xl font-bold kfu-text">5</h3>
+                        <h3 class="text-2xl font-bold kfu-text"><?= $stats["coming"] ?></h3>
                     </div>
                     <div class="kfu-primary rounded-full w-12 h-12 flex items-center justify-center">
                         <i data-feather="clock" class="text-white"></i>
@@ -48,7 +48,7 @@ component("admin/header") ?>
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">الفعاليات المنتهية</p>
-                        <h3 class="text-2xl font-bold kfu-text">12</h3>
+                        <h3 class="text-2xl font-bold kfu-text"><?= $stats["finshed"] ?></h3>
                     </div>
                     <div class="kfu-primary rounded-full w-12 h-12 flex items-center justify-center">
                         <i data-feather="check-circle" class="text-white"></i>
@@ -83,7 +83,7 @@ component("admin/header") ?>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= $event->title ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= $event->date ?> | <?= Carbon::parse($event->from_time)->locale('ar')->translatedFormat('h:i A') ?> الى <?= Carbon::parse($event->to_time)->locale('ar')->translatedFormat('h:i A')  ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= $event->location ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap"><?= count($event->registrations()) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <?php switch ($event->status) {
                                             case 1:

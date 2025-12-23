@@ -2,20 +2,20 @@
     <!-- Footer -->
     <footer class="kfu-primary text-white py-10">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">نظام إدارة الفعاليات</h3>
                     <p>منصة متكاملة لإدارة الفعاليات والأنشطة الطلابية في جامعة الملك فيصل</p>
                 </div>
-                <div>
+                <!-- <div>
                     <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="hover:underline">الرئيسية</a></li>
-                        <li><a href="#" class="hover:underline">الفعاليات</a></li>
+                        <li><a href="<?= home() ?>" class="hover:underline">الرئيسية</a></li>
+                        <li><a href="<?= home() ?>" class="hover:underline">الفعاليات</a></li>
                         <li><a href="#" class="hover:underline">تسجيل الدخول</a></li>
                         <li><a href="#" class="hover:underline">التسجيل</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <div>
                     <h3 class="text-xl font-bold mb-4">اتصل بنا</h3>
                     <ul class="space-y-2">

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Middleware\Auth;
 use App\Models\Event;
+use App\Models\Registration;
+use App\QueryBuilder;
 
 class AdminController extends Controller
 {
@@ -21,6 +23,17 @@ class AdminController extends Controller
             return redirect_home();
         }
         $events = Event::all(true);
-        return view("admin/index", compact("events"));
+
+        // echo "<pre>"
+        // print_r($events);
+        // return;
+
+        $stats = [
+            "events" => count(Event::all()),
+            "registration" => count(Registration::all()),
+            "coming" => count(QueryBuilder::select("events", ["status", "!=", "2"])),
+            "finshed" => count(QueryBuilder::select("events", ["status", "=", "2"]))
+        ];
+        return view("admin/index", compact("events", "stats"));
     }
 }
